@@ -59,13 +59,17 @@ export async function createPackage(packageData: any) {
     
     const supabase = createClient()
     
-    // AdminDice admin ID for Cargo Logistics - always use this admin
-    const ADMIN_DICE_ID = "28cd6ec5-910c-4f29-b43d-bc0fc51e4aab"
+    // Get the current logged-in admin ID
+    const adminId = await getCurrentAdminId()
+    
+    if (!adminId) {
+      return { success: false, error: "Admin not authenticated" }
+    }
     
     // Add admin_id to the package data
     const packageWithAdminId = {
       ...packageData,
-      admin_id: ADMIN_DICE_ID
+      admin_id: adminId
     }
     
     const { data, error } = await supabase
