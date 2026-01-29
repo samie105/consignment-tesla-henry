@@ -18,17 +18,17 @@ type ThemeProviderState = {
 }
 
 const initialState: ThemeProviderState = {
-  theme: "system",
+  theme: "light",
   setTheme: () => null,
-  colorPalette: "green",
+  colorPalette: "red",
   setColorPalette: () => null,
 }
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [colorPalette, setColorPaletteState] = useState<string>("green")
-  const [theme, setThemeState] = useState<string>("system")
+  const [colorPalette, setColorPaletteState] = useState<string>("red")
+  const [theme, setThemeState] = useState<string>("light")
 
   // Load color palette and theme from cookies on mount
   useEffect(() => {
@@ -39,7 +39,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       setColorPaletteState(savedColorPalette)
       applyColorPalette(savedColorPalette)
     } else {
-      applyColorPalette("green")
+      applyColorPalette("red")
     }
 
     if (savedTheme) {
@@ -74,7 +74,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     }
 
     // Set the primary hue CSS variable
-    const hue = colorHues[color] || "142" // Default to green
+    const hue = colorHues[color] || "0" // Default to red
     document.documentElement.style.setProperty("--primary-hue", hue)
 
     // Calculate RGB values for the primary color
@@ -126,7 +126,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     >
       <NextThemesProvider
         attribute="class"
-        defaultTheme="system"
+        defaultTheme="light"
         enableSystem
         disableTransitionOnChange
         forcedTheme={undefined}
