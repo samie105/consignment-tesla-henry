@@ -104,14 +104,18 @@ export async function getAllPackages() {
 
     const supabase = createClient()
 
-    // AdminDice admin ID for Cargo Logistics
-    const ADMIN_DICE_ID = "28cd6ec5-910c-4f29-b43d-bc0fc51e4aab"
+    // Get the current logged-in admin ID
+    const adminId = await getCurrentAdminId()
+    
+    if (!adminId) {
+      return { success: false, error: "Admin not authenticated", packages: [] }
+    }
 
-    // Filter packages by AdminDice admin ID
+    // Filter packages by current admin ID
     const { data, error } = await supabase
       .from("packages")
       .select("*")
-      .eq("admin_id", ADMIN_DICE_ID)
+      .eq("admin_id", adminId)
       .order("created_at", { ascending: false })
 
     if (error) {
@@ -119,7 +123,7 @@ export async function getAllPackages() {
       return { success: false, error: error.message, packages: [] }
     }
 
-    console.log(`Fetched ${data?.length || 0} packages for AdminDice (${ADMIN_DICE_ID})`)
+    console.log(`Fetched ${data?.length || 0} packages for admin ${adminId}`)
     
     return { success: true, packages: data, error: null }
   } catch (error: any) {
