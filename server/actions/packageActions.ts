@@ -41,11 +41,45 @@ const getCurrentAdminId = async () => {
 
 // Helper function to generate a random tracking number
 export async function generatetracking_number(): Promise<string> {
-  // Generate a unique tracking number
-  const prefix = "DEL"
-  const timestamp = Date.now().toString().slice(-6)
-  const random = Math.random().toString(36).substring(2, 5).toUpperCase()
-  return `${prefix}${timestamp}${random}`
+  const supabase = createClient()
+  let trackingNumber: string
+  let isUnique = false
+  let attempts = 0
+  const maxAttempts = 20
+
+  while (!isUnique && attempts < maxAttempts) {
+    // Generate a unique tracking number
+    const prefix = "DEL"
+    const timestamp = Date.now().toString().slice(-6)
+    const random = Math.random().toString(36).substring(2, 6).toUpperCase()
+    trackingNumber = `${prefix}${timestamp}${random}`
+
+    // Check if it already exists in the database
+    const { data, error } = await supabase
+      .from("packages")
+      .select("tracking_number")
+      .eq("tracking_number", trackingNumber)
+      .single()
+
+    // If no data is found, the tracking number is unique
+    if (!data && error?.code === "PGRST116") {
+      isUnique = true
+    }
+    
+    attempts++
+    
+    // Add a small delay to ensure timestamp changes
+    if (!isUnique) {
+      await new Promise(resolve => setTimeout(resolve, 10))
+    }
+  }
+
+  if (!isUnique) {
+    // Fallback to UUID-based tracking number if we couldn't generate a unique one
+    trackingNumber = `DEL${uuidv4().split('-')[0].toUpperCase()}`
+  }
+
+  return trackingNumber!
 }
 
 // Create a new package
