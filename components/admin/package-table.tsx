@@ -20,6 +20,7 @@ import { deletePackage } from "@/server/actions/packageActions"
 import { Package } from "@/types/package"
 import ExportPDFButton from "@/components/export-pdf-button"
 import { PackageData } from "@/types"
+import ShareTrackingDialog from "@/components/share-tracking-dialog"
 
 interface PackageTableProps {
   packages: Package[]
@@ -186,6 +187,7 @@ export function PackageTable({ packages, simplified = false }: PackageTableProps
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end items-center space-x-1">
+                      <ShareTrackingDialog tracking_number={pkg.tracking_number} />
                       <ExportPDFButton packageData={adaptPackageForPDF(pkg)} />
                       
                       <DropdownMenu>
