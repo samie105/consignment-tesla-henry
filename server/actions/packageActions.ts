@@ -175,15 +175,11 @@ export async function getPackageById(id: string) {
       return { success: false, error: configCheck.error }
     }
 
-    // AdminDice admin ID for Cargo Logistics
-    const ADMIN_DICE_ID = "28cd6ec5-910c-4f29-b43d-bc0fc51e4aab"
-
     const supabase = createClient()
     const { data, error } = await supabase
       .from("packages")
       .select("*")
       .eq("tracking_number", id)
-      .eq("admin_id", ADMIN_DICE_ID)
       .single()
 
     if (error) {
@@ -211,14 +207,18 @@ export async function updatePackage(tracking_number: string, packageData: any) {
     if (isTrackingNumberChanged) {
       console.log(`Updating tracking number from ${tracking_number} to ${packageData.tracking_number}`)
       
-      // AdminDice admin ID for Cargo Logistics
-      const ADMIN_DICE_ID = "28cd6ec5-910c-4f29-b43d-bc0fc51e4aab"
+      // Get current admin_id from the existing package
+      const { data: existingPkg } = await supabase
+        .from("packages")
+        .select("admin_id")
+        .eq("tracking_number", tracking_number)
+        .single()
       
       // We need to create a new record with the new tracking number and delete the old one
       // First, create a new record with the new tracking number
       const { data: newData, error: createError } = await supabase
         .from("packages")
-        .insert([{ ...packageData, admin_id: ADMIN_DICE_ID }])
+        .insert([{ ...packageData, admin_id: existingPkg?.admin_id }])
         .select()
         .single()
       
@@ -232,7 +232,6 @@ export async function updatePackage(tracking_number: string, packageData: any) {
         .from("packages")
         .delete()
         .eq("tracking_number", tracking_number)
-        .eq("admin_id", ADMIN_DICE_ID)
       
       if (deleteError) {
         console.error("Error deleting package with old tracking number:", deleteError)
@@ -241,15 +240,11 @@ export async function updatePackage(tracking_number: string, packageData: any) {
       
       return { success: true, data: newData }
     } else {
-      // AdminDice admin ID for Cargo Logistics
-      const ADMIN_DICE_ID = "28cd6ec5-910c-4f29-b43d-bc0fc51e4aab"
-      
       // Regular update without tracking number change
       const { data, error } = await supabase
         .from("packages")
         .update(packageData)
         .eq("tracking_number", tracking_number)
-        .eq("admin_id", ADMIN_DICE_ID)
         .select()
         .single()
 
@@ -277,15 +272,11 @@ export async function deletePackage(tracking_number: string) {
 
     const supabase = createClient()
 
-    // AdminDice admin ID for Cargo Logistics
-    const ADMIN_DICE_ID = "28cd6ec5-910c-4f29-b43d-bc0fc51e4aab"
-
     // Delete the package from the database
     const { error } = await supabase
       .from("packages")
       .delete()
       .eq("tracking_number", tracking_number)
-      .eq("admin_id", ADMIN_DICE_ID)
 
     if (error) {
       console.error("Error deleting package:", error)
