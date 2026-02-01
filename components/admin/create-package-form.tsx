@@ -34,20 +34,15 @@ const formSchema = z.object({
   status: z.string().optional().default("pending"),
   description: z.string().optional().default(""),
   weight: z.coerce.number().optional().default(0),
-  dimensions: z.object({
-    length: z.coerce.number().optional().default(0),
-    width: z.coerce.number().optional().default(0),
-    height: z.coerce.number().optional().default(0),
-  }).optional().default({length: 0, width: 0, height: 0}),
   sender: z.object({
     fullName: z.string().optional().default(""),
-    email: z.string().email("Invalid email format").optional().default(""),
+    email: z.string().optional().default(""),
     phone: z.string().optional().default(""),
     address: z.string().optional().default(""),
   }).optional().default({fullName: "", email: "", phone: "", address: ""}),
   recipient: z.object({
     fullName: z.string().optional().default(""),
-    email: z.string().email("Invalid email format").optional().default(""),
+    email: z.string().optional().default(""),
     phone: z.string().optional().default(""),
     address: z.string().optional().default(""),
   }).optional().default({fullName: "", email: "", phone: "", address: ""}),
@@ -94,11 +89,6 @@ export function CreatePackageForm() {
       status: "pending",
       description: "",
       weight: 0,
-      dimensions: {
-        length: 0,
-        width: 0,
-        height: 0,
-      },
       sender: {
         fullName: "",
         email: "",
@@ -286,63 +276,19 @@ export function CreatePackageForm() {
               )}
             />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              <FormField
-                control={form.control}
-                name="weight"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Weight (kg)</FormLabel>
-                    <FormControl>
-                      <Input type="number" step="0.1" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="dimensions.length"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Length (cm)</FormLabel>
-                    <FormControl>
-                      <Input type="number" step="0.1" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="dimensions.width"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Width (cm)</FormLabel>
-                    <FormControl>
-                      <Input type="number" step="0.1" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="dimensions.height"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Height (cm)</FormLabel>
-                    <FormControl>
-                      <Input type="number" step="0.1" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="weight"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Weight (kg)</FormLabel>
+                  <FormControl>
+                    <Input type="number" step="0.1" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <div className="space-y-4">
               <h3 className="text-lg font-medium">Payment Information</h3>
@@ -779,7 +725,7 @@ export function CreatePackageForm() {
               </p>
 
               {images.length > 0 ? (
-                <FileUpload onUpload={handleImageUrlsChange} initialFiles={images} maxFiles={5} />
+                <FileUpload onUpload={handleImageUrlsChange} initialFiles={images} maxFiles={10} />
               ) : (
                 <div className="text-center p-6 border rounded-lg bg-muted/20 mb-4">
                   <ImageIcon className="h-10 w-10 text-muted-foreground mx-auto mb-2" />
@@ -798,7 +744,7 @@ export function CreatePackageForm() {
                 </div>
               )}
 
-              {images.length === 0 && <FileUpload onUpload={handleImageUrlsChange} initialFiles={images} maxFiles={5} />}
+              {images.length === 0 && <FileUpload onUpload={handleImageUrlsChange} initialFiles={images} maxFiles={10} />}
             </div>
           </TabsContent>
 

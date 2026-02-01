@@ -27,7 +27,7 @@ const isValidImageUrl = (url: string | null | undefined): boolean => {
 export function FileUpload({
   onUpload,
   initialFiles = [],
-  maxFiles = 5,
+  maxFiles = 10,
   acceptedFileTypes,
   maxSize = 5 * 1024 * 1024, // Default 5MB
 }: FileUploadProps) {

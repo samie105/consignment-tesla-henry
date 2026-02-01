@@ -33,16 +33,6 @@ export default function PackageTrackingDetails({ tracking_number }: { tracking_n
   const [packageData, setPackageData] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
 
-  // Helper function to format dimensions
-  const formatDimensions = (dimensions: string | { width: number; height: number; length: number }) => {
-    if (typeof dimensions === 'string') return dimensions;
-    if (typeof dimensions === 'object' && dimensions !== null) {
-      const { width, height, length } = dimensions;
-      return `${width} × ${height} × ${length} cm`;
-    }
-    return 'Dimensions not available';
-  }
-
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true)
@@ -258,10 +248,6 @@ export default function PackageTrackingDetails({ tracking_number }: { tracking_n
                     <p>{packageData.weight ? `${packageData.weight}KG` : "Not specified yet"}</p>
                   </div>
                   <div>
-                    <h3 className="text-sm font-medium text-muted-foreground mb-1">Dimensions</h3>
-                    <p>{packageData.dimensions ? formatDimensions(packageData.dimensions) : "Not specified yet"}</p>
-                  </div>
-                  <div>
                     <h3 className="text-sm font-medium text-muted-foreground mb-1">Package Type</h3>
                     <p>{packageData.packageType || "Not specified yet"}</p>
                   </div>
@@ -467,10 +453,6 @@ export default function PackageTrackingDetails({ tracking_number }: { tracking_n
                           <div className="flex flex-col sm:flex-row sm:gap-2">
                             <dt className="text-sm font-medium text-muted-foreground sm:w-40">Weight:</dt>
                             <dd>{packageData.weight}KG</dd>
-                          </div>
-                          <div className="flex flex-col sm:flex-row sm:gap-2">
-                            <dt className="text-sm font-medium text-muted-foreground sm:w-40">Dimensions:</dt>
-                            <dd>{formatDimensions(packageData.dimensions)}</dd>
                           </div>
                         </dl>
                       </div>

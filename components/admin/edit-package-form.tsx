@@ -48,7 +48,6 @@ export function EditPackageForm({ packageData, onSuccess = () => {} }: EditPacka
       status: packageData.status,
       description: packageData.description,
       weight: packageData.weight,
-      dimensions: packageData.dimensions,
       sender: packageData.sender,
       recipient: packageData.recipient,
       payment: {
@@ -166,63 +165,19 @@ export function EditPackageForm({ packageData, onSuccess = () => {} }: EditPacka
                 )}
               />
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                <FormField
-                  control={form.control}
-                  name="weight"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Weight (kg)</FormLabel>
-                      <FormControl>
-                        <Input type="number" step="0.1" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="dimensions.length"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Length (cm)</FormLabel>
-                      <FormControl>
-                        <Input type="number" step="0.1" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="dimensions.width"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Width (cm)</FormLabel>
-                      <FormControl>
-                        <Input type="number" step="0.1" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="dimensions.height"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Height (cm)</FormLabel>
-                      <FormControl>
-                        <Input type="number" step="0.1" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              <FormField
+                control={form.control}
+                name="weight"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Weight (kg)</FormLabel>
+                    <FormControl>
+                      <Input type="number" step="0.1" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               <div className="space-y-4">
                 <h3 className="text-lg font-medium">Payment Information</h3>
@@ -598,7 +553,7 @@ export function EditPackageForm({ packageData, onSuccess = () => {} }: EditPacka
                   form.setValue("images", files)
                 }}
                 initialFiles={images}
-                maxFiles={5}
+                maxFiles={10}
               />
             </TabsContent>
 
