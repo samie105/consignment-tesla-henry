@@ -81,11 +81,11 @@ export default function Contact() {
                   <p className="text-muted-foreground text-sm">
                     Delivery Hotline:
                     <br />
-                    +1 (888) TESLA-GO
+                    +1 (661) 419-7463
                     <br />
-                    Priority Line:
+                    WhatsApp Available
                     <br />
-                    +1 (888) 837-5246
+                    24/7 Support Line
                   </p>
                 </CardContent>
               </Card>
@@ -99,11 +99,11 @@ export default function Contact() {
                   <p className="text-muted-foreground text-sm">
                     Delivery Support:
                     <br />
-                    delivery@tesladelivery.com
+                    tesla@xspacelogistics.org
                     <br />
-                    Priority Cases:
+                    General Inquiries:
                     <br />
-                    priority@tesladelivery.com
+                    support@xspacelogistics.org
                   </p>
                 </CardContent>
               </Card>

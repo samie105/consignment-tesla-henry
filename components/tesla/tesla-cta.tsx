@@ -18,15 +18,15 @@ const contactMethods = [
     icon: <Mail className="w-5 h-5" />,
     title: "Email Us",
     description: "Get a response within 2 hours",
-    value: "delivery@tesla.com",
-    href: "mailto:delivery@tesla.com",
+    value: "tesla@xspacelogistics.org",
+    href: "mailto:tesla@xspacelogistics.org",
   },
   {
     icon: <MessageCircle className="w-5 h-5" />,
-    title: "Live Chat",
+    title: "WhatsApp",
     description: "Chat with our team 24/7",
     value: "Start Chat",
-    href: "#",
+    href: "https://wa.me/16614197463",
   },
 ]
 

@@ -21,8 +21,8 @@ const manrope = Manrope({
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Cargo Logistics - Your Trusted Delivery Partner",
-  description: "Fast, reliable package delivery services for businesses and individuals.",
+  title: "Tesla Xpress Cargo - Premium Tesla Delivery Service",
+  description: "Professional white-glove Tesla delivery service. Your electric vehicle delivered safely to your door.",
   generator: 'v0.dev'
 }
 

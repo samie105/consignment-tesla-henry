@@ -85,7 +85,7 @@ export async function generatePDF(packageData: PackageData): Promise<Buffer> {
         font: 'Courier',
         info: {
           Title: `Package Tracking - ${packageData.tracking_number}`,
-          Author: "Cargo Logistics"
+          Author: "Tesla Xpress Cargo"
         }
       });
       
@@ -501,7 +501,7 @@ export async function generatePDF(packageData: PackageData): Promise<Buffer> {
       doc.font('Courier-Bold')
          .fontSize(11)
          .fillColor('white')
-         .text('Cargo Logistics', 40, footerTop + 15);
+         .text('Tesla Xpress Cargo', 40, footerTop + 15);
       
       doc.font('Courier')
          .fontSize(10)

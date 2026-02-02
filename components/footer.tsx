@@ -144,14 +144,14 @@ export default function Footer() {
                 </li>
                 <li className="flex items-center">
                   <Phone className="h-5 w-5 mr-2 text-muted-foreground" />
-                  <a href="tel:+18888375246" className="text-muted-foreground hover:text-foreground transition-colors">
-                    +1 (888) TESLA-GO
+                  <a href="tel:+16614197463" className="text-muted-foreground hover:text-foreground transition-colors">
+                    +1 (661) 419-7463
                   </a>
                 </li>
                 <li className="flex items-center">
                   <Mail className="h-5 w-5 mr-2 text-muted-foreground" />
-                  <a href="mailto:delivery@tesladelivery.com" className="text-muted-foreground hover:text-foreground transition-colors">
-                    delivery@tesladelivery.com
+                  <a href="mailto:tesla@xspacelogistics.org" className="text-muted-foreground hover:text-foreground transition-colors">
+                    tesla@xspacelogistics.org
                   </a>
                 </li>
               </ul>
@@ -160,7 +160,7 @@ export default function Footer() {
                 <h4 className="text-sm font-semibold mb-3">Chat with us</h4>
                 <div className="grid grid-cols-2 gap-3">
                   <a 
-                    href="https://wa.me/message/NVZ3SD4V37GKK1" 
+                    href="https://wa.me/16614197463" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex flex-col items-center justify-center p-4 rounded-lg border bg-card hover:bg-accent hover:border-primary transition-all duration-200 cursor-pointer group"
@@ -176,7 +176,7 @@ export default function Footer() {
                   </a>
                   
                   <a 
-                    href="https://t.me/Cargologistics_01" 
+                    href="https://t.me/Tesla_Xpress_Cargo" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex flex-col items-center justify-center p-4 rounded-lg border bg-card hover:bg-accent hover:border-primary transition-all duration-200 cursor-pointer group"

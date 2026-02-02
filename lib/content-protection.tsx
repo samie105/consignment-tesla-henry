@@ -53,7 +53,7 @@ export function decryptFromEnv(encryptedContent: string, key: string): string {
 // Component to decrypt and display protected content
 export function ProtectedContent({
   encryptedContent,
-  encryptionKey = "Cargo Logistics",
+  encryptionKey = "Tesla Xpress Cargo",
   fallback = "Loading...",
   as: Component = "div",
   className = "",
@@ -90,7 +90,7 @@ export function ProtectedContent({
 }
 
 // Hook to use protected content
-export function useProtectedContent(encryptedContent: string, encryptionKey = "Cargo Logistics") {
+export function useProtectedContent(encryptedContent: string, encryptionKey = "Tesla Xpress Cargo") {
   const [content, setContent] = useState<string>("")
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
