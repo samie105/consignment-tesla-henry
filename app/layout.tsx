@@ -51,7 +51,7 @@ export default async function RootLayout({
           <Toaster />
         </Providers>
         {!isAdminRoute && (
-          <Script src="//code.jivosite.com/widget/wEejbXSh4b" strategy="afterInteractive" />
+          <Script src="//code.jivosite.com/widget/SqITFgFhlr" strategy="afterInteractive" />
         )}
       </body>
     </html>
