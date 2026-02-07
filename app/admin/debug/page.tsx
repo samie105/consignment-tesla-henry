@@ -11,7 +11,7 @@ export default function DebugPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [supabaseInfo, setSupabaseInfo] = useState<any>(null)
-
+ 
   const loadUsers = async () => {
     setLoading(true)
     setError(null)
