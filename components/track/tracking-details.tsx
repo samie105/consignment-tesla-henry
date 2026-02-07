@@ -39,9 +39,10 @@ interface MapPackageData {
 }
 
 export function TrackingDetails({ packageData }: { packageData: PackageData }) {
-  // Helper function to format dimensions
-  const formatDimensions = (dimensions: { width: number; height: number; length: number }) => {
-    return `${dimensions.width} × ${dimensions.height} × ${dimensions.length} cm`
+  // Helper function to format dimensions - only show width if available
+  const formatDimensions = (dimensions: { width?: number; height?: number; length?: number } | null | undefined) => {
+    if (!dimensions?.width) return null
+    return `${dimensions.width} cm`
   }
 
   // Helper function to format dates in words
@@ -218,10 +219,12 @@ export function TrackingDetails({ packageData }: { packageData: PackageData }) {
                     <h3 className="text-sm font-medium text-muted-foreground mb-1">Weight</h3>
                     <p>{packageData.weight}KG</p>
                   </div>
-                  <div>
-                    <h3 className="text-sm font-medium text-muted-foreground mb-1">Dimensions</h3>
-                    <p>{formatDimensions(packageData.dimensions)}</p>
-                  </div>
+                  {formatDimensions(packageData.dimensions) && (
+                    <div>
+                      <h3 className="text-sm font-medium text-muted-foreground mb-1">Dimensions</h3>
+                      <p>{formatDimensions(packageData.dimensions)}</p>
+                    </div>
+                  )}
                   <div>
                     <h3 className="text-sm font-medium text-muted-foreground mb-1">Package Type</h3>
                     <p>{packageData.package_type || 'Standard'}</p>
@@ -440,10 +443,12 @@ export function TrackingDetails({ packageData }: { packageData: PackageData }) {
                             <dt className="text-sm font-medium text-muted-foreground sm:w-40">Weight:</dt>
                             <dd>{packageData.weight}KG</dd>
                           </div>
-                          <div className="flex flex-col sm:flex-row sm:gap-2">
-                            <dt className="text-sm font-medium text-muted-foreground sm:w-40">Dimensions:</dt>
-                            <dd>{formatDimensions(packageData.dimensions)}</dd>
-                          </div>
+                          {formatDimensions(packageData.dimensions) && (
+                            <div className="flex flex-col sm:flex-row sm:gap-2">
+                              <dt className="text-sm font-medium text-muted-foreground sm:w-40">Dimensions:</dt>
+                              <dd>{formatDimensions(packageData.dimensions)}</dd>
+                            </div>
+                          )}
                           
                           {/* Payment Information - Only show when appropriate */}
                           {shouldShowPayment() && (
